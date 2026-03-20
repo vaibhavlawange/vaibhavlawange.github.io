@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Your Name · IIT Gandhinagar</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── CONTACT-SPECIFIC ── */
+
+/* pollen / spore particle effect */
+#sporeCanvas {
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none; z-index: 0;
+}
+
+.contact-wrap {
+  display: grid; grid-template-columns: 1fr 1.3fr;
+  gap: 0; min-height: calc(100vh - 68px);
+  position: relative; z-index: 1;
+}
+
+/* LEFT side – info */
+.contact-info-panel {
+  background: var(--deep);
+  padding: 6rem 4rem;
+  display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+}
+
+.contact-info-panel::before {
+  content: '';
+  position: absolute;
+  bottom: -100px; right: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(82,183,136,0.12), transparent 70%);
+  border-radius: 50%;
+}
+
+.contact-info-panel .section-eyebrow { color: var(--leaf); }
+.contact-info-panel .section-eyebrow::before { background: var(--leaf); }
+
+.ci-greeting {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300;
+  color: var(--pale); line-height: 1.2; margin: 0.8rem 0 1.5rem;
+}
+.ci-greeting em { font-style: italic; color: var(--leaf); }
+
+.ci-desc {
+  font-size: 0.92rem; line-height: 1.85; color: rgba(183,228,199,0.6);
+  font-weight: 300; margin-bottom: 3rem; max-width: 38ch;
+}
+
+.contact-details { display: flex; flex-direction: column; gap: 1.2rem; }
+
+.cd-item {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: 1rem 1.2rem;
+  background: rgba(82,183,136,0.06);
+  border: 1px solid rgba(82,183,136,0.12);
+  border-radius: 0.6rem; transition: all 0.3s;
+}
+.cd-item:hover { background: rgba(82,183,136,0.1); border-color: rgba(82,183,136,0.25); }
+
+.cd-icon {
+  width: 40px; height: 40px; flex-shrink: 0;
+  background: rgba(82,183,136,0.12);
+  border-radius: 0.4rem;
+  display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+}
+
+.cd-label { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--leaf); margin-bottom: 0.2rem; }
+.cd-value { font-size: 0.88rem; color: var(--pale); font-weight: 400; }
+
+/* availability badge */
+.avail-badge {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: rgba(82,183,136,0.1);
+  border: 1px solid rgba(82,183,136,0.25);
+  border-radius: 2rem; padding: 0.5rem 1.2rem;
+  font-size: 0.75rem; color: var(--leaf); margin-top: 2rem;
+}
+.avail-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--leaf);
+  animation: pulse 1.8s infinite;
+}
+
+/* collab types */
+.collab-types { margin-top: 2rem; }
+.collab-types h4 {
+  font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(183,228,199,0.4); margin-bottom: 0.8rem;
+}
+.collab-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.collab-pill {
+  font-size: 0.74rem; padding: 0.3rem 0.8rem; border-radius: 2rem;
+  background: rgba(82,183,136,0.08); color: rgba(183,228,199,0.65);
+  border: 1px solid rgba(82,183,136,0.15);
+}
+
+/* RIGHT side – form */
+.contact-form-panel {
+  background: var(--cream); padding: 6rem 5rem;
+  display: flex; flex-direction: column; justify-content: center;
+}
+
+.form-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem; font-weight: 400; color: var(--deep);
+  margin-bottom: 2.5rem; line-height: 1.2;
+}
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem; }
+
+.fg {
+  display: flex; flex-direction: column; gap: 0.4rem;
+}
+.fg.full { grid-column: 1 / -1; }
+
+.fg label {
+  font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+  font-weight: 500; color: var(--mid);
+}
+
+.fg input, .fg textarea, .fg select {
+  padding: 0.75rem 1rem;
+  background: white; border: 1.5px solid rgba(82,183,136,0.2);
+  border-radius: 0.45rem;
+  font-family: 'Jost', sans-serif; font-size: 0.9rem; color: var(--text);
+  outline: none; transition: border-color 0.25s, box-shadow 0.25s;
+  resize: none;
+}
+
+.fg input:focus, .fg textarea:focus, .fg select:focus {
+  border-color: var(--leaf);
+  box-shadow: 0 0 0 3px rgba(82,183,136,0.1);
+}
+
+.fg select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%232d6a4f' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; }
+
+.form-submit {
+  display: flex; align-items: center; gap: 1.5rem; margin-top: 1.5rem;
+}
+
+.btn-submit {
+  padding: 0.85rem 2.5rem;
+  background: var(--deep); color: var(--pale);
+  border: none; border-radius: 0.4rem;
+  font-family: 'Jost', sans-serif; font-size: 0.85rem;
+  font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+  cursor: none; transition: all 0.3s; position: relative; overflow: hidden;
+}
+.btn-submit::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--mid); transform: translateX(-100%);
+  transition: transform 0.4s ease;
+}
+.btn-submit:hover::before { transform: translateX(0); }
+.btn-submit span { position: relative; z-index: 1; }
+.btn-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(26,58,42,0.2); }
+
+.form-note { font-size: 0.75rem; color: var(--text-soft); font-weight: 300; line-height: 1.5; }
+
+/* success state */
+.success-msg {
+  display: none;
+  background: rgba(82,183,136,0.08);
+  border: 1px solid rgba(82,183,136,0.25);
+  border-radius: 0.6rem; padding: 1.5rem;
+  color: var(--mid); font-size: 0.9rem; line-height: 1.7;
+}
+
+/* map-like campus card */
+.campus-card {
+  margin-top: 3rem; background: var(--mist);
+  border-radius: 0.8rem; padding: 1.5rem;
+  border: 1px solid rgba(82,183,136,0.15);
+  position: relative; overflow: hidden;
+}
+.campus-card::before {
+  content: '📍';
+  position: absolute; top: -20px; right: -10px;
+  font-size: 6rem; opacity: 0.07;
+}
+.campus-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; color: var(--deep); margin-bottom: 0.5rem;
+}
+.campus-addr { font-size: 0.8rem; color: var(--text-soft); line-height: 1.7; font-weight: 300; }
+.campus-link {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.76rem; color: var(--mid);
+  text-decoration: none; margin-top: 0.8rem;
+  font-weight: 500; transition: color 0.2s;
+}
+.campus-link:hover { color: var(--leaf); }
+
+@media (max-width: 900px) {
+  .contact-wrap { grid-template-columns: 1fr; }
+  .contact-info-panel { padding: 4rem 1.5rem; }
+  .contact-form-panel { padding: 3rem 1.5rem; }
+  .form-grid { grid-template-columns: 1fr; }
+  .fg.full { grid-column: auto; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<canvas id="leafCanvas"></canvas>
+
+<nav>
+  <a href="index.html" class="nav-logo">YourName · IIT Gandhinagar</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <!-- BANNER -->
+  <div class="hero-banner" style="min-height:36vh">
+    <div class="banner-eyebrow">Contact</div>
+    <h1 class="banner-title">Let's Grow<br><em>Ideas Together</em></h1>
+  </div>
+
+  <!-- CONTACT GRID -->
+  <div class="contact-wrap">
+
+    <!-- INFO PANEL -->
+    <div class="contact-info-panel reveal">
+      <div class="section-eyebrow">Get in Touch</div>
+      <div class="ci-greeting">
+        Open to <em>collaboration,</em><br>curious minds & good questions
+      </div>
+      <p class="ci-desc">
+        Whether you're a researcher, architect, policy-maker, or student — 
+        I welcome conversations about green buildings, rating systems, 
+        and sustainable design in India.
+      </p>
+
+      <div class="contact-details">
+        <div class="cd-item">
+          <div class="cd-icon">📧</div>
+          <div>
+            <div class="cd-label">Email</div>
+            <div class="cd-value">yourname@iitgn.ac.in</div>
+          </div>
+        </div>
+        <div class="cd-item">
+          <div class="cd-icon">📍</div>
+          <div>
+            <div class="cd-label">Office</div>
+            <div class="cd-value">AB 1/xxx, Civil Eng. Block, IIT Gandhinagar</div>
+          </div>
+        </div>
+        <div class="cd-item">
+          <div class="cd-icon">📅</div>
+          <div>
+            <div class="cd-label">Office Hours</div>
+            <div class="cd-value">Mon & Wed, 3–5 PM (by appointment)</div>
+          </div>
+        </div>
+        <div class="cd-item">
+          <div class="cd-icon">🔗</div>
+          <div>
+            <div class="cd-label">Profiles</div>
+            <div class="cd-value" style="display:flex;gap:0.8rem;flex-wrap:wrap">
+              <a href="#" style="color:var(--leaf);font-size:0.82rem">Google Scholar</a>
+              <a href="#" style="color:var(--leaf);font-size:0.82rem">ResearchGate</a>
+              <a href="#" style="color:var(--leaf);font-size:0.82rem">ORCID</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="avail-badge">
+        <span class="avail-dot"></span>
+        Available for collaboration &amp; consultations
+      </div>
+
+      <div class="collab-types">
+        <h4>Open to collaborate on</h4>
+        <div class="collab-pills">
+          <span class="collab-pill">Joint Research</span>
+          <span class="collab-pill">Grant Proposals</span>
+          <span class="collab-pill">Industry Projects</span>
+          <span class="collab-pill">Thesis Guidance</span>
+          <span class="collab-pill">Peer Review</span>
+          <span class="collab-pill">Conference Panels</span>
+          <span class="collab-pill">Policy Consultation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM PANEL -->
+    <div class="contact-form-panel">
+      <div class="form-title reveal">Send a Message</div>
+
+      <div id="contactForm" class="reveal reveal-delay-1">
+        <div class="form-grid">
+          <div class="fg">
+            <label>First Name</label>
+            <input type="text" placeholder="Jane" id="fname">
+          </div>
+          <div class="fg">
+            <label>Last Name</label>
+            <input type="text" placeholder="Smith" id="lname">
+          </div>
+          <div class="fg full">
+            <label>Email Address</label>
+            <input type="email" placeholder="jane@university.edu" id="email">
+          </div>
+          <div class="fg full">
+            <label>Affiliation</label>
+            <input type="text" placeholder="University / Organisation / Company" id="affil">
+          </div>
+          <div class="fg full">
+            <label>Inquiry Type</label>
+            <select id="inquiryType">
+              <option value="">Select a category...</option>
+              <option>Research Collaboration</option>
+              <option>Grant Proposal Partnership</option>
+              <option>Industry Consultation</option>
+              <option>Ph.D. / Thesis Enquiry</option>
+              <option>Speaking / Panel Invitation</option>
+              <option>Media / Press</option>
+              <option>General Question</option>
+            </select>
+          </div>
+          <div class="fg full">
+            <label>Subject</label>
+            <input type="text" placeholder="Brief subject line" id="subject">
+          </div>
+          <div class="fg full">
+            <label>Message</label>
+            <textarea rows="5" placeholder="Share details about your inquiry, project, or question..." id="msg"></textarea>
+          </div>
+        </div>
+
+        <div class="form-submit">
+          <button class="btn-submit" onclick="submitForm()">
+            <span>Send Message →</span>
+          </button>
+          <div class="form-note">
+            I typically respond within<br>2–3 working days.
+          </div>
+        </div>
+      </div>
+
+      <div class="success-msg" id="successMsg">
+        <strong style="display:block;margin-bottom:0.5rem;font-size:1rem">🌿 Message received!</strong>
+        Thank you for reaching out. I'll get back to you at your email address within 2–3 working days. 
+        In the meantime, feel free to explore my publications or connect via Google Scholar.
+      </div>
+
+      <div class="campus-card reveal reveal-delay-2" style="margin-top:2rem;">
+        <div class="campus-title">IIT Gandhinagar Campus</div>
+        <div class="campus-addr">
+          Palaj, Gandhinagar, Gujarat — 382355, India<br>
+          Department of Civil Engineering
+        </div>
+        <a href="https://maps.google.com/?q=IIT+Gandhinagar" target="_blank" class="campus-link">
+          Open in Maps →
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <div class="foot-left">Your Name · IIT Gandhinagar</div>
+    <div class="foot-copy">© 2026 · Civil Engineering · Gandhinagar, Gujarat</div>
+  </div>
+  <div class="social-links">
+    <a class="social-link" href="#">G</a>
+    <a class="social-link" href="#">R</a>
+    <a class="social-link" href="#">in</a>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx=0, my=0, rx=0, ry=0;
+  document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cursor.style.left=mx+'px'; cursor.style.top=my+'px'; });
+  function animRing() { rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animRing); }
+  animRing();
+
+  function submitForm() {
+    const email = document.getElementById('email').value;
+    const msg = document.getElementById('msg').value;
+    if (!email || !msg) { alert('Please fill in at least your email and message.'); return; }
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+  }
+</script>
+</body>
+</html>

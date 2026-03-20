@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home | Green Building Researcher · IIT Gandhinagar</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── HOME-SPECIFIC ── */
+.hero-home {
+  min-height: 100vh;
+  background: var(--forest);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative; overflow: hidden;
+  padding-top: 68px;
+}
+
+.hero-home::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 200px;
+  background: linear-gradient(to bottom, transparent, var(--forest) 80%);
+  pointer-events: none; z-index: 2;
+}
+
+/* animated forest floor */
+.forest-floor {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 120px; z-index: 1;
+  background: linear-gradient(to top, rgba(13,40,24,0.9), transparent);
+}
+
+/* growing vine on right */
+.vine-anim {
+  position: absolute; right: 5%; top: 10%;
+  opacity: 0.25; z-index: 1;
+}
+
+.vine-path {
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: growVine 4s 0.5s ease forwards;
+}
+
+@keyframes growVine {
+  to { stroke-dashoffset: 0; }
+}
+
+.leaf-burst {
+  position: absolute;
+  animation: leafPop 0.6s ease forwards;
+  opacity: 0;
+  transform-origin: center;
+}
+
+@keyframes leafPop {
+  0% { opacity: 0; transform: scale(0) rotate(0deg); }
+  60% { opacity: 1; transform: scale(1.2) rotate(10deg); }
+  100% { opacity: 1; transform: scale(1) rotate(5deg); }
+}
+
+/* breathing green orb */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: breathe 5s ease-in-out infinite;
+}
+.orb-1 { width: 500px; height: 500px; background: rgba(45,106,79,0.25); top: -100px; right: -100px; animation-delay: 0s; }
+.orb-2 { width: 350px; height: 350px; background: rgba(82,183,136,0.15); bottom: 100px; left: 30%; animation-delay: 2.5s; }
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+/* hero text */
+.hero-content {
+  position: relative; z-index: 5;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 5rem 4rem 8rem 5rem;
+}
+
+.greeting {
+  display: flex; align-items: center; gap: 0.8rem;
+  font-size: 0.72rem; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--leaf);
+  margin-bottom: 1.5rem;
+  animation: fadeSlide 0.8s 0.2s ease both;
+}
+.greeting .dot {
+  width: 7px; height: 7px; background: var(--leaf);
+  border-radius: 50%; animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(82,183,136,0.5); }
+  50% { box-shadow: 0 0 0 8px rgba(82,183,136,0); }
+}
+
+h1.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.5rem, 6vw, 6rem);
+  font-weight: 300; line-height: 1;
+  color: var(--cream);
+  margin-bottom: 0.5rem;
+  animation: fadeSlide 0.8s 0.3s ease both;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  color: var(--leaf); margin-bottom: 1.8rem;
+  animation: fadeSlide 0.8s 0.4s ease both;
+}
+
+.hero-desc {
+  font-size: 0.95rem; line-height: 1.9; color: rgba(183,228,199,0.65);
+  max-width: 44ch; margin-bottom: 3rem; font-weight: 300;
+  animation: fadeSlide 0.8s 0.5s ease both;
+}
+
+.hero-cta {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  animation: fadeSlide 0.8s 0.6s ease both;
+}
+
+/* floating stats */
+.stat-ring {
+  position: relative; z-index: 5;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 2rem;
+  padding: 4rem 3rem 8rem;
+}
+
+.stat-card {
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(82,183,136,0.3);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  background: rgba(13,40,24,0.6);
+  backdrop-filter: blur(10px);
+  animation: floatCard 4s ease-in-out infinite;
+}
+
+.stat-card:nth-child(2) { animation-delay: 1.3s; }
+.stat-card:nth-child(3) { animation-delay: 2.6s; }
+
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem; font-weight: 600; color: var(--pale);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.65rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--leaf); margin-top: 0.3rem;
+}
+
+/* quick links */
+.quick-links {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  background: var(--deep); position: relative; z-index: 3;
+}
+
+.quick-link {
+  display: flex; flex-direction: column; align-items: flex-start;
+  padding: 2.5rem 2.5rem;
+  text-decoration: none;
+  border-right: 1px solid rgba(82,183,136,0.1);
+  transition: background 0.3s;
+  position: relative; overflow: hidden;
+}
+.quick-link:last-child { border-right: none; }
+.quick-link::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(82,183,136,0.05);
+  transform: translateX(-100%); transition: transform 0.4s ease;
+}
+.quick-link:hover::before { transform: translateX(0); }
+
+.ql-icon { font-size: 1.6rem; margin-bottom: 0.8rem; }
+.ql-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem; color: var(--pale); margin-bottom: 0.3rem;
+}
+.ql-sub { font-size: 0.76rem; color: rgba(183,228,199,0.45); font-weight: 300; }
+.ql-arrow {
+  margin-top: auto; padding-top: 1.2rem;
+  font-size: 1.2rem; color: var(--leaf);
+  transition: transform 0.3s;
+}
+.quick-link:hover .ql-arrow { transform: translateX(6px); }
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* featured highlight */
+.highlight-band {
+  background: var(--mist);
+  padding: 5rem;
+  display: grid; grid-template-columns: 1fr 1.4fr;
+  gap: 5rem; align-items: center;
+}
+
+.hl-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--pale); color: var(--mid);
+  font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.3rem 0.8rem; border-radius: 2rem;
+  font-weight: 500; margin-bottom: 1.2rem;
+}
+
+.hl-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 400;
+  color: var(--deep); line-height: 1.45;
+  font-style: italic;
+}
+
+.hl-quote cite {
+  display: block; margin-top: 1.2rem;
+  font-size: 0.8rem; font-style: normal;
+  color: var(--leaf); letter-spacing: 0.06em;
+}
+
+.hl-metrics {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.metric-box {
+  background: white; border-radius: 0.8rem;
+  padding: 1.5rem; border: 1px solid rgba(82,183,136,0.15);
+  position: relative; overflow: hidden;
+}
+
+.metric-box::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--leaf), transparent);
+}
+
+.metric-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem; font-weight: 600; color: var(--deep);
+  line-height: 1;
+}
+.metric-unit { font-size: 1rem; color: var(--leaf); }
+.metric-desc {
+  font-size: 0.78rem; color: var(--text-soft); margin-top: 0.4rem; line-height: 1.5; font-weight: 300;
+}
+
+@media (max-width: 900px) {
+  .hero-home { grid-template-columns: 1fr; }
+  .hero-content { padding: 4rem 1.5rem 6rem; }
+  .stat-ring { display: none; }
+  .quick-links { grid-template-columns: 1fr 1fr; }
+  .highlight-band { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- LEAF CANVAS -->
+<canvas id="leafCanvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">YourName · IIT Gandhinagar</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero-home">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <!-- Animated vine -->
+  <div class="vine-anim">
+    <svg width="220" height="600" viewBox="0 0 220 600" fill="none">
+      <path class="vine-path" d="M110,0 C110,80 60,100 80,180 C100,260 160,280 140,360 C120,440 70,460 90,540 C100,580 130,590 110,600"
+        stroke="#52b788" stroke-width="2.5" fill="none"/>
+      <!-- leaves along vine (appear after vine grows) -->
+      <g style="animation: leafPop 0.5s 2s ease forwards; opacity:0; transform-origin:80px 175px">
+        <ellipse cx="80" cy="175" rx="18" ry="30" fill="rgba(82,183,136,0.5)" transform="rotate(-30,80,175)"/>
+      </g>
+      <g style="animation: leafPop 0.5s 2.5s ease forwards; opacity:0; transform-origin:140px 355px">
+        <ellipse cx="155" cy="350" rx="16" ry="28" fill="rgba(82,183,136,0.4)" transform="rotate(20,155,350)"/>
+      </g>
+      <g style="animation: leafPop 0.5s 3s ease forwards; opacity:0; transform-origin:75px 530px">
+        <ellipse cx="75" cy="530" rx="14" ry="24" fill="rgba(82,183,136,0.45)" transform="rotate(-15,75,530)"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="greeting">
+      <div class="dot"></div>
+      Researcher · Green Building Rating Systems
+    </div>
+    <h1 class="hero-name">Your Full<br><em style="color:var(--leaf);font-style:italic">Name</em></h1>
+    <div class="hero-title">Ph.D. Researcher, Civil Engineering</div>
+    <p class="hero-desc">
+      Advancing evidence-based approaches to sustainable building certification — 
+      evaluating GRIHA, LEED, and IGBC frameworks for India's diverse climates and communities.
+    </p>
+    <div class="hero-cta">
+      <a href="research.html" class="btn btn-forest">Explore Research →</a>
+      <a href="publications.html" class="btn btn-ghost">Publications</a>
+    </div>
+  </div>
+
+  <div class="stat-ring">
+    <div class="stat-card">
+      <span class="stat-num">12<em style="font-size:1.5rem;color:var(--leaf)">+</em></span>
+      <span class="stat-label">Papers</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">6</span>
+      <span class="stat-label">Projects</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">5<em style="font-size:1.5rem;color:var(--leaf)">yr</em></span>
+      <span class="stat-label">Research</span>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK LINKS -->
+<div class="quick-links">
+  <a href="about.html" class="quick-link">
+    <div class="ql-icon">🌿</div>
+    <div class="ql-title">About Me</div>
+    <div class="ql-sub">Background & expertise</div>
+    <div class="ql-arrow">→</div>
+  </a>
+  <a href="research.html" class="quick-link">
+    <div class="ql-icon">🔬</div>
+    <div class="ql-title">Research</div>
+    <div class="ql-sub">Active & past projects</div>
+    <div class="ql-arrow">→</div>
+  </a>
+  <a href="publications.html" class="quick-link">
+    <div class="ql-icon">📄</div>
+    <div class="ql-title">Publications</div>
+    <div class="ql-sub">Journals & conferences</div>
+    <div class="ql-arrow">→</div>
+  </a>
+  <a href="contact.html" class="quick-link">
+    <div class="ql-icon">✉️</div>
+    <div class="ql-title">Contact</div>
+    <div class="ql-sub">Let's collaborate</div>
+    <div class="ql-arrow">→</div>
+  </a>
+</div>
+
+<!-- HIGHLIGHT BAND -->
+<div class="highlight-band">
+  <div class="reveal">
+    <div class="hl-badge">🌱 Research Focus</div>
+    <div class="hl-quote">
+      "Green building rating systems must be calibrated for local climate, 
+      culture, and construction realities — not transplanted from other contexts."
+      <cite>— Your Name, 2024</cite>
+    </div>
+    <div style="margin-top:2rem;">
+      <a href="about.html" class="btn btn-outline">Learn More →</a>
+    </div>
+  </div>
+
+  <div class="hl-metrics reveal reveal-delay-2">
+    <div class="metric-box">
+      <div class="metric-val">40<span class="metric-unit">%</span></div>
+      <div class="metric-desc">Average energy savings gap between predicted & actual performance in rated buildings</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-val">5<span class="metric-unit"> zones</span></div>
+      <div class="metric-desc">Indian climate zones covered in comparative rating analysis</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-val">3<span class="metric-unit"> systems</span></div>
+      <div class="metric-desc">GRIHA · LEED India · IGBC evaluated and compared</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-val">18<span class="metric-unit">+ bldg</span></div>
+      <div class="metric-desc">Buildings studied via post-occupancy evaluation</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="foot-left">Your Name · IIT Gandhinagar</div>
+    <div class="foot-copy">© 2026 · Civil Engineering · Gandhinagar, Gujarat</div>
+  </div>
+  <div class="social-links">
+    <a class="social-link" href="#">G</a>
+    <a class="social-link" href="#">R</a>
+    <a class="social-link" href="#">in</a>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx=0, my=0, rx=0, ry=0;
+  document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cursor.style.left=mx+'px'; cursor.style.top=my+'px'; });
+  function animRing() {
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+  document.querySelectorAll('a,.btn,.quick-link').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.style.transform='translate(-50%,-50%) scale(2.5)'; ring.style.opacity='0'; });
+    el.addEventListener('mouseleave', () => { cursor.style.transform='translate(-50%,-50%) scale(1)'; ring.style.opacity='0.5'; });
+  });
+</script>
+</body>
+</html>

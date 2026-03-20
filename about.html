@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | Your Name · IIT Gandhinagar</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── ABOUT-SPECIFIC ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: start;
+}
+
+/* Profile card with tree rings bg */
+.profile-wrap {
+  position: sticky; top: 100px;
+}
+
+.profile-visual {
+  position: relative; width: 300px; height: 300px; margin: 0 auto 2rem;
+}
+
+/* tree rings animation */
+.tree-rings {
+  position: absolute; inset: -30px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.ring {
+  position: absolute; border-radius: 50%;
+  border: 1px solid rgba(82,183,136,0.2);
+  animation: expandRing 3s ease-out infinite;
+}
+.ring:nth-child(1) { width: 340px; height: 340px; animation-delay: 0s; }
+.ring:nth-child(2) { width: 300px; height: 300px; animation-delay: 0.8s; }
+.ring:nth-child(3) { width: 260px; height: 260px; animation-delay: 1.6s; }
+
+@keyframes expandRing {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1); opacity: 0.3; }
+  100% { transform: scale(1.05); opacity: 0; }
+}
+
+.profile-photo {
+  width: 300px; height: 300px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--mid), var(--leaf));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5rem; color: white; font-weight: 300;
+  border: 4px solid rgba(82,183,136,0.4);
+  position: relative; z-index: 2;
+  /* Replace with: background-image: url('assets/photo.jpg'); background-size: cover; */
+}
+
+.profile-info {
+  text-align: center;
+}
+.profile-info h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; font-weight: 400;
+  color: var(--deep); margin-bottom: 0.3rem;
+}
+.profile-info .profile-role {
+  font-size: 0.85rem; color: var(--leaf);
+  letter-spacing: 0.06em; margin-bottom: 1.2rem;
+}
+.profile-info .profile-inst {
+  font-size: 0.82rem; color: var(--text-soft); line-height: 1.7;
+}
+
+.profile-links {
+  display: flex; justify-content: center; gap: 0.8rem; margin-top: 1.5rem;
+}
+.profile-link {
+  display: flex; align-items: center; gap: 0.4rem;
+  font-size: 0.75rem; color: var(--mid);
+  text-decoration: none; letter-spacing: 0.05em;
+  border: 1px solid rgba(45,106,79,0.3);
+  padding: 0.35rem 0.9rem; border-radius: 2rem;
+  transition: all 0.25s;
+}
+.profile-link:hover { background: var(--mist); border-color: var(--leaf); }
+
+/* Bio text */
+.bio-text p {
+  font-size: 0.97rem; line-height: 1.9; color: var(--text-soft);
+  margin-bottom: 1.2rem; font-weight: 300;
+}
+
+/* Expertise pills */
+.skill-cloud {
+  display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 2rem 0;
+}
+.skill-pill {
+  padding: 0.4rem 1rem; border-radius: 2rem;
+  font-size: 0.78rem; font-weight: 500;
+  background: var(--mist); color: var(--mid);
+  border: 1px solid rgba(82,183,136,0.2);
+  transition: all 0.25s;
+}
+.skill-pill:hover { background: var(--pale); transform: translateY(-2px); }
+
+/* Timeline */
+.timeline { position: relative; margin-top: 1.5rem; }
+
+.timeline::before {
+  content: '';
+  position: absolute; left: 14px; top: 6px; bottom: 0; width: 2px;
+  background: linear-gradient(to bottom, var(--leaf), transparent);
+}
+
+.tl-item {
+  display: grid; grid-template-columns: 30px 1fr;
+  gap: 1.2rem; margin-bottom: 2rem; align-items: start;
+}
+
+.tl-dot {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--deep);
+  border: 2px solid var(--leaf);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; position: relative; z-index: 1;
+  flex-shrink: 0;
+}
+
+.tl-year {
+  font-size: 0.7rem; letter-spacing: 0.08em; color: var(--leaf);
+  font-weight: 500; text-transform: uppercase; margin-bottom: 0.2rem;
+}
+
+.tl-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; color: var(--deep); margin-bottom: 0.3rem;
+}
+
+.tl-desc {
+  font-size: 0.82rem; color: var(--text-soft); line-height: 1.65; font-weight: 300;
+}
+
+/* expertise cards */
+.expertise-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;
+}
+
+.exp-card {
+  background: white; border-radius: 0.8rem;
+  padding: 1.4rem; border: 1px solid var(--mist);
+  transition: all 0.3s;
+}
+.exp-card:hover { border-color: var(--leaf); transform: translateY(-3px); }
+
+.exp-icon { font-size: 1.6rem; margin-bottom: 0.6rem; }
+.exp-card h4 {
+  font-size: 0.85rem; font-weight: 600; color: var(--deep); margin-bottom: 0.3rem;
+}
+.exp-card p { font-size: 0.75rem; color: var(--text-soft); line-height: 1.6; font-weight: 300; }
+
+/* ratings badge strip */
+.rating-strip {
+  background: var(--deep);
+  padding: 2.5rem 5rem;
+  display: flex; align-items: center; gap: 4rem;
+  overflow-x: auto;
+}
+
+.rating-badge {
+  flex-shrink: 0; text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+}
+
+.rb-circle {
+  width: 70px; height: 70px; border-radius: 50%;
+  background: rgba(82,183,136,0.1);
+  border: 2px solid rgba(82,183,136,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem;
+  transition: all 0.3s;
+}
+.rating-badge:hover .rb-circle {
+  background: rgba(82,183,136,0.2);
+  border-color: var(--leaf);
+  transform: scale(1.1);
+}
+
+.rb-name {
+  font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--leaf); font-weight: 500;
+}
+.rb-desc { font-size: 0.65rem; color: rgba(183,228,199,0.4); }
+
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .profile-wrap { position: static; }
+  .expertise-grid { grid-template-columns: 1fr; }
+  .rating-strip { padding: 2rem 1.5rem; gap: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<canvas id="leafCanvas"></canvas>
+
+<nav>
+  <a href="index.html" class="nav-logo">YourName · IIT Gandhinagar</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <!-- BANNER -->
+  <div class="hero-banner">
+    <div class="banner-eyebrow">About Me</div>
+    <h1 class="banner-title">Roots in Research,<br><em>Branches in Sustainability</em></h1>
+  </div>
+
+  <!-- RATING STRIP -->
+  <div class="rating-strip">
+    <div class="rating-badge">
+      <div class="rb-circle">🌿</div>
+      <div class="rb-name">GRIHA</div>
+      <div class="rb-desc">Green Rating for<br>Integrated Habitat Assessment</div>
+    </div>
+    <div class="rating-badge">
+      <div class="rb-circle">⭐</div>
+      <div class="rb-name">LEED India</div>
+      <div class="rb-desc">Leadership in Energy &<br>Environmental Design</div>
+    </div>
+    <div class="rating-badge">
+      <div class="rb-circle">🏛️</div>
+      <div class="rb-name">IGBC</div>
+      <div class="rb-desc">Indian Green Building<br>Council</div>
+    </div>
+    <div class="rating-badge">
+      <div class="rb-circle">⚡</div>
+      <div class="rb-name">BEE Star</div>
+      <div class="rb-desc">Bureau of Energy<br>Efficiency</div>
+    </div>
+    <div class="rating-badge">
+      <div class="rb-circle">🌍</div>
+      <div class="rb-name">BREEAM</div>
+      <div class="rb-desc">International benchmark<br>comparisons</div>
+    </div>
+  </div>
+
+  <!-- ABOUT MAIN -->
+  <div class="section" style="background:var(--cream);">
+    <div class="about-grid">
+
+      <!-- LEFT: Profile -->
+      <div class="profile-wrap reveal">
+        <div class="profile-visual">
+          <div class="tree-rings">
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+          </div>
+          <div class="profile-photo">YN</div>
+        </div>
+        <div class="profile-info">
+          <h2>Your Full Name</h2>
+          <div class="profile-role">Ph.D. Researcher · Green Buildings</div>
+          <div class="profile-inst">
+            Department of Civil Engineering<br>
+            Indian Institute of Technology Gandhinagar<br>
+            Palaj, Gandhinagar — 382355
+          </div>
+          <div class="profile-links">
+            <a href="#" class="profile-link">📧 Email</a>
+            <a href="#" class="profile-link">G Scholar</a>
+            <a href="#" class="profile-link">ORCID</a>
+          </div>
+        </div>
+
+        <!-- Skills -->
+        <div style="margin-top: 2.5rem;">
+          <div class="section-eyebrow" style="margin-bottom:1rem">Tools & Methods</div>
+          <div class="skill-cloud">
+            <span class="skill-pill">EnergyPlus</span>
+            <span class="skill-pill">eQUEST</span>
+            <span class="skill-pill">MATLAB</span>
+            <span class="skill-pill">R / Python</span>
+            <span class="skill-pill">AHP-MCDA</span>
+            <span class="skill-pill">LCA</span>
+            <span class="skill-pill">SPSS</span>
+            <span class="skill-pill">AutoCAD</span>
+            <span class="skill-pill">Revit</span>
+            <span class="skill-pill">IES VE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Bio + Timeline -->
+      <div>
+        <div class="reveal">
+          <div class="section-eyebrow">Background</div>
+          <h2 class="section-title">About My Work</h2>
+          <div class="bio-text">
+            <p>
+              I am a researcher at IIT Gandhinagar working at the intersection of building science, 
+              environmental engineering, and sustainability policy. My primary focus is on green building 
+              rating systems — how they are structured, what they actually achieve, and how they can 
+              better serve India's vast diversity of climates, building typologies, and socioeconomic contexts.
+            </p>
+            <p>
+              India is home to some of the world's most ambitious green building targets, yet the gap 
+              between certified performance and actual performance remains striking. My research aims 
+              to understand this gap through post-occupancy evaluations, energy simulations, and 
+              comparative policy analysis.
+            </p>
+            <p>
+              Beyond the technical, I believe green buildings must be equitable — accessible to 
+              tier-2 cities, affordable housing, and public institutions, not just premium commercial 
+              developments in metropolitan areas.
+            </p>
+          </div>
+        </div>
+
+        <!-- Expertise Cards -->
+        <div class="expertise-grid reveal reveal-delay-1">
+          <div class="exp-card">
+            <div class="exp-icon">🏆</div>
+            <h4>Rating System Analysis</h4>
+            <p>Comparative assessment of GRIHA, LEED, IGBC across climate zones and typologies</p>
+          </div>
+          <div class="exp-card">
+            <div class="exp-icon">🌡️</div>
+            <h4>Building Energy Simulation</h4>
+            <p>EnergyPlus and eQUEST modelling for thermal comfort and energy performance</p>
+          </div>
+          <div class="exp-card">
+            <div class="exp-icon">♻️</div>
+            <h4>Life Cycle Assessment</h4>
+            <p>Embodied carbon and material impact analysis across construction types</p>
+          </div>
+          <div class="exp-card">
+            <div class="exp-icon">📊</div>
+            <h4>Post-Occupancy Evaluation</h4>
+            <p>Field studies measuring thermal comfort, IEQ, and occupant satisfaction</p>
+          </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="reveal reveal-delay-2" style="margin-top: 3rem;">
+          <div class="section-eyebrow" style="margin-bottom:1.5rem;">Journey</div>
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-dot">🎓</div>
+              <div>
+                <div class="tl-year">2020 — Present</div>
+                <div class="tl-title">Ph.D. Researcher · IIT Gandhinagar</div>
+                <div class="tl-desc">Thesis: "Contextualising Green Building Rating Systems for Indian Climatic Zones: A Performance-Gap Analysis"</div>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot">🏛️</div>
+              <div>
+                <div class="tl-year">2018 — 2020</div>
+                <div class="tl-title">M.Tech. Structural Engineering · [Your University]</div>
+                <div class="tl-desc">Thesis focused on sustainable material selection using LCA methodology. Graduated with distinction.</div>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot">🌱</div>
+              <div>
+                <div class="tl-year">2022</div>
+                <div class="tl-title">Research Intern · TERI (The Energy & Resources Institute)</div>
+                <div class="tl-desc">Contributed to GRIHA handbook revision and case study documentation for the Green Buildings programme.</div>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot">✈️</div>
+              <div>
+                <div class="tl-year">2023</div>
+                <div class="tl-title">Visiting Researcher · [Partner University]</div>
+                <div class="tl-desc">Collaborative research on cross-cultural comparisons of building certification frameworks.</div>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot">📖</div>
+              <div>
+                <div class="tl-year">2014 — 2018</div>
+                <div class="tl-title">B.Tech. Civil Engineering · [Your University]</div>
+                <div class="tl-desc">Introduced to sustainable construction through final year project on passive cooling strategies.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div>
+    <div class="foot-left">Your Name · IIT Gandhinagar</div>
+    <div class="foot-copy">© 2026 · Civil Engineering · Gandhinagar, Gujarat</div>
+  </div>
+  <div class="social-links">
+    <a class="social-link" href="#">G</a>
+    <a class="social-link" href="#">R</a>
+    <a class="social-link" href="#">in</a>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx=0, my=0, rx=0, ry=0;
+  document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cursor.style.left=mx+'px'; cursor.style.top=my+'px'; });
+  function animRing() { rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animRing); }
+  animRing();
+</script>
+</body>
+</html>
