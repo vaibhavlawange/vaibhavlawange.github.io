@@ -68,79 +68,69 @@
 /* pub list */
 .pub-list-section { padding: 4rem 5rem; }
 
-.year-group { margin-bottom: 3rem; }
-
-.year-header {
-  display: flex; align-items: center; gap: 1.5rem;
-  margin-bottom: 1.5rem;
+.empty-publications {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 4rem 0 2rem;
 }
-.yr-num {
+
+.empty-card {
+  background: white;
+  border: 1px solid rgba(82,183,136,0.12);
+  border-radius: 1rem;
+  padding: 3rem;
+  box-shadow: 0 10px 30px rgba(13,40,24,0.04);
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.empty-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 3rem; font-weight: 300; color: var(--mid);
-  line-height: 1; opacity: 0.5; min-width: 80px;
-}
-.yr-line { flex: 1; height: 1px; background: rgba(82,183,136,0.15); }
-
-.pub-entry {
-  display: grid; grid-template-columns: auto 1fr auto;
-  gap: 1.8rem; align-items: start;
-  padding: 1.5rem 0;
-  border-bottom: 1px solid rgba(82,183,136,0.07);
-  transition: all 0.25s;
-  cursor: default;
-}
-.pub-entry:hover { background: rgba(82,183,136,0.02); padding-left: 0.6rem; }
-
-.pub-type-badge {
-  width: 60px; text-align: center;
-  padding: 0.3rem 0.4rem;
-  border-radius: 0.3rem;
-  font-size: 0.65rem; letter-spacing: 0.06em;
-  text-transform: uppercase; font-weight: 600;
-  flex-shrink: 0; margin-top: 0.15rem;
-}
-.badge-journal { background: rgba(82,183,136,0.12); color: var(--mid); }
-.badge-conference { background: rgba(201,168,76,0.12); color: var(--bark); }
-.badge-review { background: rgba(45,106,79,0.1); color: var(--mid); }
-.badge-book { background: rgba(124,92,58,0.1); color: var(--bark); }
-
-.pub-body {}
-
-.pub-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.05rem; font-weight: 600;
-  color: var(--deep); line-height: 1.35;
-  margin-bottom: 0.3rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--deep);
+  line-height: 1.15;
+  margin-bottom: 1rem;
 }
 
-.pub-authors { font-size: 0.78rem; color: var(--text-soft); margin-bottom: 0.25rem; font-weight: 300; }
-.pub-authors strong { color: var(--mid); font-weight: 500; }
-
-.pub-journal {
-  font-size: 0.8rem; color: var(--text-soft); font-style: italic;
+.empty-subtitle {
+  font-size: 1rem;
+  color: var(--text-soft);
+  line-height: 1.9;
+  max-width: 60ch;
+  font-weight: 300;
 }
 
-.pub-meta {
-  display: flex; gap: 0.6rem; margin-top: 0.6rem; flex-wrap: wrap;
-}
-.pub-kw {
-  font-size: 0.67rem; background: var(--mist); color: var(--mid);
-  padding: 0.15rem 0.5rem; border-radius: 0.25rem;
+.empty-grid {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
 }
 
-.pub-actions { display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-end; }
-.pub-btn {
-  font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase;
-  padding: 0.3rem 0.7rem; border-radius: 0.25rem;
-  border: 1px solid rgba(82,183,136,0.25);
-  background: transparent; color: var(--mid);
-  cursor: none; transition: all 0.2s; text-decoration: none;
-  white-space: nowrap;
+.empty-box {
+  background: var(--mist);
+  border-radius: 0.8rem;
+  padding: 1.4rem;
+  border: 1px solid rgba(82,183,136,0.1);
 }
-.pub-btn:hover { background: var(--mist); }
 
-/* highlight own name */
-.pub-me { color: var(--deep) !important; font-weight: 600 !important; }
+.empty-box-title {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--leaf);
+  margin-bottom: 0.5rem;
+}
+
+.empty-box-text {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  line-height: 1.7;
+  font-weight: 300;
+}
 
 /* citation box */
 .cite-impact {
@@ -169,8 +159,8 @@
   .stats-bar { grid-template-columns: 1fr 1fr; }
   .stat-item { border: none; border-bottom: 1px solid rgba(82,183,136,0.1); }
   .pub-list-section { padding: 3rem 1.5rem; }
-  .pub-entry { grid-template-columns: auto 1fr; }
-  .pub-actions { display: none; }
+  .empty-card { padding: 2rem 1.5rem; }
+  .empty-grid { grid-template-columns: 1fr; }
   .cite-impact { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
 }
 </style>
@@ -182,7 +172,7 @@
 <canvas id="leafCanvas"></canvas>
 
 <nav>
-  <a href="index.html" class="nav-logo">YourName · IIT Gandhinagar</a>
+  <a href="index.html" class="nav-logo">Vaibhav Gajanan Lawange · IIT Gandhinagar</a>
   <ul>
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>
@@ -196,241 +186,81 @@
   <!-- BANNER -->
   <div class="hero-banner">
     <div class="banner-eyebrow">Publications</div>
-    <h1 class="banner-title">Ideas That <em>Take Root</em><br>in the Literature</h1>
+    <h1 class="banner-title">Research Outputs <em>in Progress</em><br>and Future Contributions</h1>
   </div>
 
   <!-- STATS BAR -->
   <div class="stats-bar">
-    <div class="stat-item"><div class="si-num">12</div><div class="si-label">Total Publications</div></div>
-    <div class="stat-item"><div class="si-num">8</div><div class="si-label">Journal Articles</div></div>
-    <div class="stat-item"><div class="si-num">3</div><div class="si-label">Conference Papers</div></div>
-    <div class="stat-item"><div class="si-num">1</div><div class="si-label">Book Chapter</div></div>
+    <div class="stat-item"><div class="si-num">0</div><div class="si-label">Total Publications</div></div>
+    <div class="stat-item"><div class="si-num">0</div><div class="si-label">Journal Articles</div></div>
+    <div class="stat-item"><div class="si-num">0</div><div class="si-label">Conference Papers</div></div>
+    <div class="stat-item"><div class="si-num">0</div><div class="si-label">Book Chapters</div></div>
   </div>
 
   <!-- CONTROLS -->
   <div class="pub-controls">
-    <input class="pub-search" type="text" placeholder="🔍  Search publications..." id="pubSearch" oninput="searchPubs()">
+    <input class="pub-search" type="text" placeholder="🔍  Publications will appear here in the future" id="pubSearch" disabled>
     <div class="type-filters">
-      <button class="type-btn active" onclick="filterType('all',this)">All</button>
-      <button class="type-btn" onclick="filterType('journal',this)">Journals</button>
-      <button class="type-btn" onclick="filterType('conference',this)">Conferences</button>
-      <button class="type-btn" onclick="filterType('review',this)">Reviews</button>
+      <button class="type-btn active" type="button">All</button>
+      <button class="type-btn" type="button">Journals</button>
+      <button class="type-btn" type="button">Conferences</button>
+      <button class="type-btn" type="button">Reviews</button>
     </div>
-    <div class="pub-count" id="pubCount">12 publications</div>
+    <div class="pub-count" id="pubCount">0 publications</div>
   </div>
 
-  <!-- PUBLICATION LIST -->
-  <div class="pub-list-section" id="pubListSection">
+  <!-- EMPTY PUBLICATIONS SECTION -->
+  <div class="pub-list-section">
+    <div class="empty-publications">
+      <div class="empty-card reveal">
+        <div class="empty-icon">📚</div>
+        <div class="empty-title">Publications will be added as my research progresses.</div>
+        <div class="empty-subtitle">
+          I am currently a Ph.D. scholar in Civil Engineering at IIT Gandhinagar, working on research related to
+          sustainable built environments, green building rating systems, thermal comfort, indoor environmental quality,
+          and performance-based evaluation in the Indian context. Peer-reviewed publications, conference papers, and
+          scholarly outputs will be updated here as they become available.
+        </div>
 
-    <!-- 2024 -->
-    <div class="year-group">
-      <div class="year-header"><div class="yr-num">2024</div><div class="yr-line"></div></div>
-
-      <div class="pub-entry reveal" data-type="journal" data-title="benchmarking griha leed india multi-climate zone institutional buildings">
-        <div class="pub-type-badge badge-journal">Journal</div>
-        <div class="pub-body">
-          <div class="pub-title">Benchmarking GRIHA and LEED India: A Multi-Climate Zone Study of Institutional Buildings</div>
-          <div class="pub-authors"><strong class="pub-me">Your Name</strong>, Co-Author B, Co-Author C</div>
-          <div class="pub-journal">Energy and Buildings · Vol. 312, pp. 114–128 · doi:10.1016/j.enbuild.2024.XXXXX</div>
-          <div class="pub-meta">
-            <span class="pub-kw">GRIHA</span><span class="pub-kw">LEED India</span><span class="pub-kw">Climate Zones</span><span class="pub-kw">Performance Gap</span>
+        <div class="empty-grid">
+          <div class="empty-box">
+            <div class="empty-box-title">Current Status</div>
+            <div class="empty-box-text">
+              No publications listed at present.
+            </div>
           </div>
-        </div>
-        <div class="pub-actions">
-          <a href="#" class="pub-btn">PDF</a>
-          <a href="#" class="pub-btn">DOI</a>
-          <a href="#" class="pub-btn">Cite</a>
-        </div>
-      </div>
-
-      <div class="pub-entry reveal reveal-delay-1" data-type="journal" data-title="credit weightage delphi ahp green rating systems india">
-        <div class="pub-type-badge badge-journal">Journal</div>
-        <div class="pub-body">
-          <div class="pub-title">Towards Context-Sensitive Credit Weightage in Green Building Rating Systems: A Delphi-AHP Approach</div>
-          <div class="pub-authors"><strong class="pub-me">Your Name</strong>, Co-Author D</div>
-          <div class="pub-journal">Sustainable Cities and Society · Vol. 102 · doi:10.1016/j.scs.2024.XXXXX</div>
-          <div class="pub-meta">
-            <span class="pub-kw">Credit Weightage</span><span class="pub-kw">AHP</span><span class="pub-kw">India</span>
+          <div class="empty-box">
+            <div class="empty-box-title">Research Focus</div>
+            <div class="empty-box-text">
+              Green building rating systems, thermal comfort, indoor environmental quality, and sustainability-oriented civil engineering research.
+            </div>
           </div>
-        </div>
-        <div class="pub-actions">
-          <a href="#" class="pub-btn">PDF</a>
-          <a href="#" class="pub-btn">DOI</a>
-          <a href="#" class="pub-btn">Cite</a>
+          <div class="empty-box">
+            <div class="empty-box-title">Future Updates</div>
+            <div class="empty-box-text">
+              Journal articles, conference papers, posters, technical reports, and related academic outputs will be added here.
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
-    <!-- 2023 -->
-    <div class="year-group">
-      <div class="year-header"><div class="yr-num">2023</div><div class="yr-line"></div></div>
-
-      <div class="pub-entry reveal" data-type="journal" data-title="post-occupancy thermal comfort griha hot dry climate">
-        <div class="pub-type-badge badge-journal">Journal</div>
-        <div class="pub-body">
-          <div class="pub-title">Post-Occupancy Thermal Comfort in GRIHA 4-Star Rated Buildings in Hot-Dry Climates: A Field Study</div>
-          <div class="pub-authors"><strong class="pub-me">Your Name</strong>, Co-Author B, Co-Author E</div>
-          <div class="pub-journal">Building and Environment · Vol. 248 · doi:10.1016/j.buildenv.2023.XXXXX</div>
-          <div class="pub-meta">
-            <span class="pub-kw">Post-Occupancy</span><span class="pub-kw">Thermal Comfort</span><span class="pub-kw">ASHRAE 55</span><span class="pub-kw">Gujarat</span>
-          </div>
-        </div>
-        <div class="pub-actions">
-          <a href="#" class="pub-btn">PDF</a>
-          <a href="#" class="pub-btn">DOI</a>
-          <a href="#" class="pub-btn">Cite</a>
-        </div>
-      </div>
-
-      <div class="pub-entry reveal reveal-delay-1" data-type="journal" data-title="embodied carbon traditional building materials western india lca">
-        <div class="pub-type-badge badge-journal">Journal</div>
-        <div class="pub-body">
-          <div class="pub-title">Embodied Carbon of Traditional Building Materials in Western India: A Life Cycle Assessment</div>
-          <div class="pub-authors"><strong class="pub-me">Your Name</strong>, Co-Author F, Advisor Name</div>
-          <div class="pub-journal">Journal of Cleaner Production · Vol. 410 · doi:10.1016/j.jclepro.2023.XXXXX</div>
-          <div class="pub-meta">
-            <span class="pub-kw">LCA</span><span class="pub-kw">Embodied Carbon</span><span class="pub-kw">Vernacular</span><span class="pub-kw">Gujarat</span>
-          </div>
-        </div>
-        <div class="pub-actions">
-          <a href="#" class="pub-btn">PDF</a>
-          <a href="#" class="pub-btn">DOI</a>
-          <a href="#" class="pub-btn">Cite</a>
-        </div>
-      </div>
-
-      <div class="pub-entry reveal reveal-delay-2" data-type="conference" data-title="green building challenges tier-2 cities gujarat adoption">
-        <div class="pub-type-badge badge-conference">Conf.</div>
-        <div class="pub-body">
-          <div class="pub-title">Challenges in Green Building Adoption in Tier-2 Cities of Gujarat: Barriers and Enablers</div>
-          <div class="pub-authors"><strong class="pub-me">Your Name</strong>, Co-Author G</div>
-          <div class="pub-journal">PLEA 2023 – Proc. of the 37th International Conference on Passive and Low Energy Architecture · Prague</div>
-          <div class="pub-meta">
-            <span class="pub-kw">Tier-2 Cities</span><span class="pub-kw">Adoption Barriers</span><span class="pub-kw">India</span>
-          </div>
-        </div>
-        <div class="pub-actions">
-          <a href="#" class="pub-btn">PDF</a>
-          <a href="#" class="pub-btn">Cite</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2022 -->
-    <div class="year-group">
-      <div class="year-header"><div class="yr-num">2022</div><div class="yr-line"></div></div>
-
-      <div class="pub-entry reveal" data-type="journal" data-title="credit weightage revision delphi ahp green building india">
-        <div class="pub-type-badge badge-journal">Journal</div>
-        <div class="pub-body">
-          <div class="pub-title">Credit Weightage Revision in Green Rating Systems: A Delphi-AHP Framework for the Indian Context</div>
-          <div class="pub-authors"><strong class="pub-me">Your Name</strong>, Co-Author B, Advisor Name</div>
-          <div class="pub-journal">Sustainable Cities and Society · Vol. 87 · doi:10.1016/j.scs.2022.XXXXX</div>
-          <div class="pub-meta">
-            <span class="pub-kw">Delphi</span><span class="pub-kw">AHP</span><span class="pub-kw">Credit Weightage</span>
-          </div>
-        </div>
-        <div class="pub-actions">
-          <a href="#" class="pub-btn">PDF</a>
-          <a href="#" class="pub-btn">DOI</a>
-          <a href="#" class="pub-btn">Cite</a>
-        </div>
-      </div>
-
-      <div class="pub-entry reveal reveal-delay-1" data-type="conference" data-title="passive cooling vernacular architecture gujarat energy">
-        <div class="pub-type-badge badge-conference">Conf.</div>
-        <div class="pub-body">
-          <div class="pub-title">Passive Cooling Potential of Vernacular Architecture in Hot-Dry Climates of Western India</div>
-          <div class="pub-authors">Co-Author H, <strong class="pub-me">Your Name</strong></div>
-          <div class="pub-journal">SBE 2022 – Sustainable Built Environment · Rotterdam</div>
-          <div class="pub-meta">
-            <span class="pub-kw">Passive Cooling</span><span class="pub-kw">Vernacular</span><span class="pub-kw">Simulation</span>
-          </div>
-        </div>
-        <div class="pub-actions">
-          <a href="#" class="pub-btn">PDF</a>
-          <a href="#" class="pub-btn">Cite</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2021 -->
-    <div class="year-group">
-      <div class="year-header"><div class="yr-num">2021</div><div class="yr-line"></div></div>
-
-      <div class="pub-entry reveal" data-type="review" data-title="review green building rating systems india suitability">
-        <div class="pub-type-badge badge-review">Review</div>
-        <div class="pub-body">
-          <div class="pub-title">A Comprehensive Review of Green Building Rating Systems: Suitability for the Indian Context</div>
-          <div class="pub-authors"><strong class="pub-me">Your Name</strong>, Advisor Name, Co-Author I</div>
-          <div class="pub-journal">Renewable and Sustainable Energy Reviews · Vol. 150 · doi:10.1016/j.rser.2021.XXXXX</div>
-          <div class="pub-meta">
-            <span class="pub-kw">GRIHA</span><span class="pub-kw">LEED</span><span class="pub-kw">IGBC</span><span class="pub-kw">India</span><span class="pub-kw">Review</span>
-          </div>
-        </div>
-        <div class="pub-actions">
-          <a href="#" class="pub-btn">PDF</a>
-          <a href="#" class="pub-btn">DOI</a>
-          <a href="#" class="pub-btn">Cite</a>
-        </div>
-      </div>
-
-      <div class="pub-entry reveal reveal-delay-1" data-type="journal" data-title="energy performance residential buildings iit gandhinagar campus">
-        <div class="pub-type-badge badge-journal">Journal</div>
-        <div class="pub-body">
-          <div class="pub-title">Energy Performance Benchmarks for Educational Buildings in Hot-Dry Climates of India</div>
-          <div class="pub-authors">Co-Author J, <strong class="pub-me">Your Name</strong>, Advisor Name</div>
-          <div class="pub-journal">Energy for Sustainable Development · Vol. 63 · doi:10.1016/j.esd.2021.XXXXX</div>
-          <div class="pub-meta">
-            <span class="pub-kw">Benchmarks</span><span class="pub-kw">Educational</span><span class="pub-kw">Hot-Dry</span>
-          </div>
-        </div>
-        <div class="pub-actions">
-          <a href="#" class="pub-btn">PDF</a>
-          <a href="#" class="pub-btn">DOI</a>
-          <a href="#" class="pub-btn">Cite</a>
-        </div>
-      </div>
-
-      <div class="pub-entry reveal reveal-delay-2" data-type="conference" data-title="whole life carbon campus buildings monitoring iit gandhinagar">
-        <div class="pub-type-badge badge-conference">Conf.</div>
-        <div class="pub-body">
-          <div class="pub-title">Monitoring Whole-Life Carbon in New Campus Buildings: A Framework and Early Findings</div>
-          <div class="pub-authors"><strong class="pub-me">Your Name</strong>, Co-Author K</div>
-          <div class="pub-journal">CIBSE Technical Symposium 2021 · London (Virtual)</div>
-          <div class="pub-meta">
-            <span class="pub-kw">Carbon Monitoring</span><span class="pub-kw">Campus</span>
-          </div>
-        </div>
-        <div class="pub-actions">
-          <a href="#" class="pub-btn">PDF</a>
-          <a href="#" class="pub-btn">Cite</a>
-        </div>
-      </div>
-    </div>
-
-    <div id="noPubs" style="display:none;text-align:center;padding:4rem;color:var(--text-soft)">
-      <div style="font-size:2.5rem;margin-bottom:1rem">🔍</div>
-      No publications match your search.
-    </div>
-
   </div>
 
   <!-- CITATION METRICS -->
   <div class="cite-impact">
     <div class="ci-box reveal">
       <div class="ci-icon">📈</div>
-      <div class="ci-val">180+</div>
+      <div class="ci-val">0</div>
       <div class="ci-label">Total Citations</div>
     </div>
     <div class="ci-box reveal reveal-delay-1">
       <div class="ci-icon">H</div>
-      <div class="ci-val">7</div>
+      <div class="ci-val">0</div>
       <div class="ci-label">h-index</div>
     </div>
     <div class="ci-box reveal reveal-delay-2">
       <div class="ci-icon">🔢</div>
-      <div class="ci-val">10</div>
+      <div class="ci-val">0</div>
       <div class="ci-label">i10-index</div>
     </div>
   </div>
@@ -439,8 +269,8 @@
 
 <footer>
   <div>
-    <div class="foot-left">Your Name · IIT Gandhinagar</div>
-    <div class="foot-copy">© 2026 · Civil Engineering · Gandhinagar, Gujarat</div>
+    <div class="foot-left">Vaibhav Gajanan Lawange · IIT Gandhinagar</div>
+    <div class="foot-copy">© 2026 · Civil Engineering · Gandhinagar, Gujarat, India</div>
   </div>
   <div class="social-links">
     <a class="social-link" href="#">G</a>
@@ -454,35 +284,19 @@
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
   let mx=0, my=0, rx=0, ry=0;
-  document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cursor.style.left=mx+'px'; cursor.style.top=my+'px'; });
-  function animRing() { rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animRing); }
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+  function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
   animRing();
-
-  let currentType = 'all';
-
-  function filterType(type, btn) {
-    currentType = type;
-    document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    updateVisible();
-  }
-
-  function searchPubs() { updateVisible(); }
-
-  function updateVisible() {
-    const query = document.getElementById('pubSearch').value.toLowerCase();
-    const entries = document.querySelectorAll('.pub-entry');
-    let count = 0;
-    entries.forEach(e => {
-      const typeMatch = currentType === 'all' || e.dataset.type === currentType;
-      const textMatch = !query || e.dataset.title.includes(query) || e.innerText.toLowerCase().includes(query);
-      const show = typeMatch && textMatch;
-      e.style.display = show ? '' : 'none';
-      if (show) count++;
-    });
-    document.getElementById('pubCount').textContent = count + ' publication' + (count !== 1 ? 's' : '');
-    document.getElementById('noPubs').style.display = count === 0 ? 'block' : 'none';
-  }
 </script>
 </body>
 </html>
